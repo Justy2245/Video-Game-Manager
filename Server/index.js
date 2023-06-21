@@ -24,5 +24,13 @@ app.post('/videogames', async(req, res) => {
         console.error(error.message);
     }
 });
+app.get('/videogames', async(req, res) => {
+    try {
+        const getVGames = await pool.query('SELECT * FROM videogames');
+        res.json(getVGames.rows);
+    } catch (error) {
+        console.error(error.message);
+    }
+})
 
 app.listen(4000);
