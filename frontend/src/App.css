@@ -1,3 +1,32 @@
 .layout {
+    width: 90vw;
+    max-width: 1170px;
+    margin: 5rem auto;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+}
+@media only screen and (max-width: 1100px) {
+  .layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (max-width: 700px) {
+  .layout {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.layout section {
+  background: gray;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  width: 20rem;
+  text-align: center;
+}
+.layout section img{
+  width:200px;
+  height:200px;
+}
+.center {
   text-align: center;
 }
