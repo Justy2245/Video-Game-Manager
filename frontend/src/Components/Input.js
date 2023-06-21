@@ -22,9 +22,9 @@ const Input = ({ VGames }) => {
                     <button type="button" className="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div className="modal-body">
-                    <input type="text" className="form-control" />
-                    <input type="text" className="form-control mt-2 mb-2" />
-                    <input type="text" className="form-control" />
+                    <input type="text" className="form-control" placeholder ='Enter Name'/>
+                    <input type="text" className="form-control mt-2 mb-2" placeholder ='Enter Path (Ex: D:/folder/folder1/name.exe)'/>
+                    <input type="text" className="form-control" placeholder ='Enter Picture Link'/>
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-warning" data-dismiss="modal">
