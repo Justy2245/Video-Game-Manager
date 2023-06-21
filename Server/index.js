@@ -15,11 +15,11 @@ app.post('/videogames', async(req, res) => {
     try {
         const { name, pathlink, picturelink } = req.body;
         
-        /*const newVGame = await pool.query (
+        const newVGame = await pool.query (
             'INSERT INTO videogames (name, pathlink, picturelink) VALUES($1, $2, $3) RETURNING *', [name, pathlink, picturelink]
         );
-        res.json(newVGame.rows[0]);*/
-        console.log(pathlink);
+        res.json(newVGame.rows[0]);
+        console.log(name);
     } catch (error) {
         console.error(error.message);
     }

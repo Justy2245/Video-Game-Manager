@@ -1,25 +1,29 @@
-import React from "react";
+import React, {useState} from "react";
 
 const Input = ({ VGames }) => {
-    
+    const [VGames1, setVGames] = useState(VGames);
     const addVGame = async event => {
         event.preventDefault();
         try {
-            console.log('test');
+            const response = await fetch('http://localhost:4000/videogames', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(VGames1)
+            });
+        window.location ='/';
         } catch (error) {
             console.error(error.message);
         }
     };
-
     return (
         <>
         <div>
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target={`#id${VGames.vg_id}`}>
+            <button type="button" className="btn btn-primary" data-toggle="modal" data-target='#mainModal'>
                 Add New Game
             </button>
         </div>
 
-        <div className="modal" id={`id${VGames.vg_id}`}>
+        <div className="modal" id ='mainModal'>
             <div className="modal-dialog">
                 <div className="modal-content">
                 <div className="modal-header">
@@ -27,9 +31,9 @@ const Input = ({ VGames }) => {
                     <button type="button" className="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div className="modal-body">
-                    <input type="text" className="form-control" placeholder ='Enter Name'/>
-                    <input type="text" className="form-control mt-2 mb-2" placeholder ='Enter Path (Ex: D:/folder/folder1/name.exe)'/>
-                    <input type="text" className="form-control" placeholder ='Enter Picture Link'/>
+                    <input type="text" className="form-control" placeholder ='Enter Name' name = 'name' onChange ={event => setVGames({...VGames1, [event.target.name]: event.target.value})}/>
+                    <input type="text" className="form-control mt-2 mb-2" placeholder ='Enter Path (Ex: D:/folder/folder1/name.exe)' name = 'pathlink' onChange ={event => setVGames({...VGames1, [event.target.name]: event.target.value})}/>
+                    <input type="text" className="form-control" placeholder ='Enter Picture Link' name = 'picturelink' onChange ={event => setVGames({...VGames1, [event.target.name]: event.target.value})}/>
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-warning" data-dismiss="modal" onClick = {event => addVGame(event)}>
