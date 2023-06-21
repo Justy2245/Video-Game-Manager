@@ -2,9 +2,14 @@ import React from "react";
 
 const Input = ({ VGames }) => {
     
-    const addVGame = () => {
-        console.log('temp');
-    }
+    const addVGame = async event => {
+        event.preventDefault();
+        try {
+            console.log('test');
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
 
     return (
         <>
@@ -27,7 +32,7 @@ const Input = ({ VGames }) => {
                     <input type="text" className="form-control" placeholder ='Enter Picture Link'/>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-warning" data-dismiss="modal">
+                    <button type="button" className="btn btn-warning" data-dismiss="modal" onClick = {event => addVGame(event)}>
                         Add
                     </button>
                     <button type="button" className="btn btn-danger" data-dismiss="modal">
