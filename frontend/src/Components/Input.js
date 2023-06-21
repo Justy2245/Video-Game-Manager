@@ -2,6 +2,8 @@ import React, {useState} from "react";
 
 const Input = ({ VGames }) => {
     const [VGames1, setVGames] = useState(VGames);
+    
+    //Add new video game to database via post request
     const addVGame = async event => {
         event.preventDefault();
         try {

@@ -4,6 +4,7 @@ const Layout = () => {
     
     const [VGames, setVGames] = useState([]);
 
+    //Get all of the video games stored in database
     const getVGames = async () => {
         try {
             const data = await fetch('http://localhost:4000/videogames');
@@ -14,6 +15,7 @@ const Layout = () => {
         }
     }
 
+    //Launch exe file associated with video game
     const execute = (event) => {
         const { execFile } = require('child_process');
         const child = execFile('C:/Users/Justin/AppData/Local/Postman/Postman.exe', (error) => {
