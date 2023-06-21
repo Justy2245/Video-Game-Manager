@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Input from './Input';
 
 const Layout = () => {
     
@@ -21,7 +22,10 @@ const Layout = () => {
 
     return (
         <>  
-            <h1>Video Game Manager</h1>
+            <div className ='center'>
+                <h1>Video Game Manager</h1>
+                <Input VGames/>
+            </div>
             <div className ='layout'>
                 {VGames.map(VGames => (
                     <section key ={VGames.vg_id}>
