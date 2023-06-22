@@ -13,17 +13,19 @@ const Layout = () => {
             const json = await data.json();
             setVGames(json);
         } catch (error) {
-            console.log(error.message)
+            console.log(error.message);
         }
     }
 
     //Launch exe file associated with video game
-    const execute = (event, pathlink) => {
-        const { execFile } = require('child_process');
-        console.log(pathlink);
-        /*const child = execFile('C:/Users/Justin/AppData/Local/Postman/Postman.exe', (error) => {
-            console.log(error);
-        });*/
+    const execute = async (event, vg_id) => {
+        event.preventDefault();
+        try {
+            console.log(vg_id);
+            const response = await fetch(`http://localhost:4000/videogames/launch/${vg_id}`);
+        } catch (error) {
+            console.log(error.message);
+        }
     } 
 
     useEffect(() => {
@@ -41,7 +43,7 @@ const Layout = () => {
                     <section key ={VGames.vg_id}>
                         <img src={`${VGames.picturelink}`} alt=""></img>
                         <h4>{VGames.name}</h4>
-                        <button onClick = {event => execute(event, `${VGames.pathlink}`)}>Launch Game</button>
+                        <button onClick = {event => execute(event, `${VGames.vg_id}`)}>Launch Game</button>
                         <Edit VGames = {VGames}/>
                     </section>
                 ))}

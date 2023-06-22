@@ -3,7 +3,7 @@ import React, {useState} from "react";
 const Edit = ({ VGames }) => {
     const [VGames1, setVGames] = useState(VGames);
     
-    //Add new video game to database via post request
+    //eddi video game via PUT request
     const editVGame = async event => {
         event.preventDefault();
         try {
@@ -17,6 +17,19 @@ const Edit = ({ VGames }) => {
             console.error(error.message);
         }
     };
+    const deleteVGame = async event => {
+        event.preventDefault();
+        try {
+            const response = await fetch(`http://localhost:4000/videogames/${VGames.vg_id}`, {
+                method: 'DELETE',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify(VGames1)
+            });
+            window.location ='/';
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
     return (
         <>
             <button type="button" data-toggle="modal" data-target={`#id${VGames.vg_id}`}>
@@ -36,7 +49,7 @@ const Edit = ({ VGames }) => {
                     <input type="text" className="form-control" value = {VGames1.picturelink} name = 'picturelink' onChange ={event => setVGames({...VGames1, [event.target.name]: event.target.value})}/>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-danger" data-dismiss="modal" onClick = {event => editVGame(event)}>
+                    <button type="button" className="btn btn-danger" data-dismiss="modal" onClick = {event => deleteVGame(event)}>
                         Delete
                     </button>
                     <button type="button" className="btn btn-warning" data-dismiss="modal" onClick = {event => editVGame(event)}>
