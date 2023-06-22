@@ -27,8 +27,23 @@ app.post('/videogames', async(req, res) => {
 
 app.get('/videogames', async(req, res) => {
     try {
-        const getVGames = await pool.query('SELECT * FROM videogames');
+        const getVGames = await pool.query('SELECT * FROM videogames ORDER BY name');
         res.json(getVGames.rows);
+    } catch (error) {
+        console.error(error.message);
+    }
+});
+
+app.get('/videogames/launch/:vg_id', async(req, res) => {
+    try {
+        const { execFile } = require('child_process');
+        const { vg_id } = req.params;
+        const getVGame = await pool.query(`SELECT * FROM videogames WHERE vg_id = ${vg_id}`);
+        console.log(getVGame.rows[0].pathlink);
+        const child = execFile(getVGame.rows[0].pathlink, (error) => {
+            console.log(error);
+        });
+        res.send('Successfully launched');
     } catch (error) {
         console.error(error.message);
     }
