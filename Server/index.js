@@ -46,7 +46,7 @@ app.get('/videogames/launch/:vg_id', async(req, res) => {
         const child = execFile(getVGame.rows[0].pathlink, (error) => {
             console.log(error);
         });
-        res.send('Successfully launched');
+        res.json('Successfully launched');
     } catch (error) {
         console.error(error.message);
     }
@@ -62,6 +62,19 @@ app.put('/videogames/:vg_id', async(req, res) => {
             [name, pathlink, picturelink, vg_id]
         );
         res.json('Updated Video Game');
+    } catch (error) {
+        console.error(error.message);
+    }
+});
+
+app.delete('/videogames/:vg_id', async(req, res) => {
+    try {
+        const { vg_id } = req.params;
+        const deleteVGames = await pool.query(
+            'DELETE FROM videogames WHERE vg_id = $1',
+            [vg_id]
+        );
+        res.json('Deleted Video Game');
     } catch (error) {
         console.error(error.message);
     }
