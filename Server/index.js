@@ -31,6 +31,19 @@ app.get('/videogames', async(req, res) => {
     } catch (error) {
         console.error(error.message);
     }
-})
+});
+app.put('/videogames/:id', async(req, res) => {
+    try {
+        const { id } = req.params;
+        const { data } = req.body;
+        /*const updateVGames = await pool.query(
+            'UPDATE videogames SET '
+        )*/
+        console.log(id);
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+});
 
 app.listen(4000);

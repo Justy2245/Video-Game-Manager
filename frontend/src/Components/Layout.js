@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Input from './Input';
+import Edit from './Edit';
+
 const Layout = () => {
     
     const [VGames, setVGames] = useState([]);
@@ -16,11 +18,12 @@ const Layout = () => {
     }
 
     //Launch exe file associated with video game
-    const execute = (event) => {
+    const execute = (event, pathlink) => {
         const { execFile } = require('child_process');
-        const child = execFile('C:/Users/Justin/AppData/Local/Postman/Postman.exe', (error) => {
+        console.log(pathlink);
+        /*const child = execFile('C:/Users/Justin/AppData/Local/Postman/Postman.exe', (error) => {
             console.log(error);
-        });
+        });*/
     } 
 
     useEffect(() => {
@@ -38,7 +41,8 @@ const Layout = () => {
                     <section key ={VGames.vg_id}>
                         <img src={`${VGames.picturelink}`} alt=""></img>
                         <h4>{VGames.name}</h4>
-                        <button onClick = {execute}>Launch Game</button>
+                        <button onClick = {event => execute(event, `${VGames.pathlink}`)}>Launch Game</button>
+                        <Edit VGames = {VGames}/>
                     </section>
                 ))}
             </div>
