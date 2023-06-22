@@ -24,6 +24,7 @@ app.post('/videogames', async(req, res) => {
         console.error(error.message);
     }
 });
+
 app.get('/videogames', async(req, res) => {
     try {
         const getVGames = await pool.query('SELECT * FROM videogames');
@@ -32,15 +33,16 @@ app.get('/videogames', async(req, res) => {
         console.error(error.message);
     }
 });
+
 app.put('/videogames/:id', async(req, res) => {
     try {
         const { id } = req.params;
-        const { data } = req.body;
-        /*const updateVGames = await pool.query(
-            'UPDATE videogames SET '
-        )*/
-        console.log(id);
-        console.log(data);
+        const { name, pathlink, picturelink } = req.body;
+        const updateVGames = await pool.query(
+            'UPDATE videogames SET name = $1, pathlink = $2, picturelink = $3 WHERE vg_id = $4',
+            [name, pathlink, picturelink, id]
+        );
+        res.json('Updated Video Game');
     } catch (error) {
         console.error(error.message);
     }
