@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import Input from './Input';
-import Edit from './Edit';
+import Edit from './Edit-Delete';
+var sorted = 'alpha';
 
 const Layout = () => {
-    
+
     const [VGames, setVGames] = useState([]);
 
-    //Get all of the video games stored in database
+    //get all of the video games stored in database in alphabetical order
     const getVGames = async () => {
         try {
-            const data = await fetch('http://localhost:4000/videogames');
+            const data = await fetch('http://localhost:4000/videogames/alpha');
+            const json = await data.json();
+            setVGames(json);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+    //get all of the video games stored in database ordered by recently used
+    const getVGames1 = async () => {
+        try {
+            const data = await fetch('http://localhost:4000/videogames/recent');
             const json = await data.json();
             setVGames(json);
         } catch (error) {
@@ -17,7 +28,7 @@ const Layout = () => {
         }
     }
 
-    //Launch exe file associated with video game
+    //launch exe file associated with video game
     const execute = async (event, vg_id) => {
         event.preventDefault();
         try {
@@ -28,15 +39,34 @@ const Layout = () => {
         }
     } 
 
+    const alpha = (event) => {
+        localStorage.setItem('sorted', 'alpha');
+        window.location = '/';
+    }
+
+    const recent = (event) => {
+        localStorage.setItem('sorted', 'recent');
+        window.location = '/';
+    }
+
     useEffect(() => {
-        getVGames();
+        if(localStorage.getItem('sorted') === 'recent')
+        {
+            getVGames1();
+        }
+        else {
+            getVGames();
+        }
     }, []);
 
     return (
         <>  
+            
             <div className ='center'>
                 <h1>Video Game Manager</h1>
                 <Input VGames/>
+                <button onClick={alpha} >Sort Alphabetically</button>
+                <button onClick={recent} >Sort by recent</button>
             </div>
             <div className ='layout'>
                 {VGames.map(VGames => (

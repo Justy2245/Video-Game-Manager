@@ -3,7 +3,7 @@ import React, {useState} from "react";
 const Edit = ({ VGames }) => {
     const [VGames1, setVGames] = useState(VGames);
     
-    //eddi video game via PUT request
+    //edit video game via PUT request
     const editVGame = async event => {
         event.preventDefault();
         try {
@@ -29,7 +29,7 @@ const Edit = ({ VGames }) => {
         } catch (error) {
             console.error(error.message);
         }
-    }
+    };
     return (
         <>
             <button type="button" data-toggle="modal" data-target={`#id${VGames.vg_id}`}>
