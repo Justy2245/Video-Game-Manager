@@ -11,6 +11,7 @@ app.use(express.json());
 
 //Routes
 
+//add new video game
 app.post('/videogames', async(req, res) => {
     try {
         const { name, pathlink, picturelink } = req.body;
@@ -25,6 +26,7 @@ app.post('/videogames', async(req, res) => {
     }
 });
 
+//get all video games
 app.get('/videogames', async(req, res) => {
     try {
         const getVGames = await pool.query('SELECT * FROM videogames ORDER BY name');
@@ -34,6 +36,7 @@ app.get('/videogames', async(req, res) => {
     }
 });
 
+//launching video game via pathlink
 app.get('/videogames/launch/:vg_id', async(req, res) => {
     try {
         const { execFile } = require('child_process');
@@ -49,13 +52,14 @@ app.get('/videogames/launch/:vg_id', async(req, res) => {
     }
 });
 
-app.put('/videogames/:id', async(req, res) => {
+//editing video game
+app.put('/videogames/:vg_id', async(req, res) => {
     try {
-        const { id } = req.params;
+        const { vg_id } = req.params;
         const { name, pathlink, picturelink } = req.body;
         const updateVGames = await pool.query(
             'UPDATE videogames SET name = $1, pathlink = $2, picturelink = $3 WHERE vg_id = $4',
-            [name, pathlink, picturelink, id]
+            [name, pathlink, picturelink, vg_id]
         );
         res.json('Updated Video Game');
     } catch (error) {
