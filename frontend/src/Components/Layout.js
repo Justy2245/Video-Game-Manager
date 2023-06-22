@@ -32,7 +32,6 @@ const Layout = () => {
     const execute = async (event, vg_id) => {
         event.preventDefault();
         try {
-            console.log(vg_id);
             const response = await fetch(`http://localhost:4000/videogames/launch/${vg_id}`);
         } catch (error) {
             console.log(error.message);

@@ -38,7 +38,7 @@ app.get('/videogames/alpha', async(req, res) => {
 
 app.get('/videogames/recent', async(req, res) => {
     try {
-        const getVGames = await pool.query('SELECT * FROM videogames ORDER BY time_used');
+        const getVGames = await pool.query('SELECT * FROM videogames ORDER BY time_used DESC');
         res.json(getVGames.rows);
     } catch (error) {
         console.error(error.message);
@@ -51,9 +51,27 @@ app.get('/videogames/launch/:vg_id', async(req, res) => {
         const { execFile } = require('child_process');
         const { vg_id } = req.params;
         const getVGame = await pool.query(`SELECT * FROM videogames WHERE vg_id = ${vg_id}`);
+        
+        //getting date and formatting for database
+        //data used for sorting by recently opened
+        const months = {Jan: '01', Feb: '02', Mar: '03', Apr: '04', 
+                        May: '05', Jun: '06', Jul: '07', Aug: '08',
+                        Sep: '09', Oct: '10', Nov: '11', Dec: '12'};
+        var startdate = new Date();
+        startdate = String(startdate);
+        var [dWeek, month, day, year, time] = startdate.split(' ');
+        month = months[month];
+        var final = year + '-' + month + '-' + day + ' ' + time;
+        console.log(final);
+
+        //update time_used value
+        const setTime = await pool.query(`UPDATE videogames SET time_used = '${final}' WHERE vg_id = ${vg_id}`);
+
+        //execute file
         const child = execFile(getVGame.rows[0].pathlink, (error) => {
             console.log(error);
         });
+
         res.json('Successfully launched');
     } catch (error) {
         console.error(error.message);

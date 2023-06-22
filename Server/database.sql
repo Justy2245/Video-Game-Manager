@@ -5,5 +5,5 @@ CREATE TABLE videogames (
     name VARCHAR(255) NOT NULL,
     pathlink VARCHAR(255) NOT NULL,
     picturelink varchar(255),
-    date_used TIMESTAMP
+    date_used TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
