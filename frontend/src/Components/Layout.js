@@ -38,11 +38,13 @@ const Layout = () => {
         }
     } 
 
+    //change to alpha to sort alphabetically on refresh
     const alpha = (event) => {
         localStorage.setItem('sorted', 'alpha');
         window.location = '/';
     }
 
+    //change to recent to sort by recently launch on refresh
     const recent = (event) => {
         localStorage.setItem('sorted', 'recent');
         window.location = '/';
@@ -60,7 +62,6 @@ const Layout = () => {
 
     return (
         <>  
-            
             <div className ='center'>
                 <h1>Video Game Manager</h1>
                 <Input VGames/>

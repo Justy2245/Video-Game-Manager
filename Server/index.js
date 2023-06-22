@@ -26,7 +26,7 @@ app.post('/videogames', async(req, res) => {
     }
 });
 
-//get all video games
+//get all video games in alphabet order
 app.get('/videogames/alpha', async(req, res) => {
     try {
         const getVGames = await pool.query('SELECT * FROM videogames ORDER BY name');
@@ -36,6 +36,7 @@ app.get('/videogames/alpha', async(req, res) => {
     }
 });
 
+//get all video games in recent order
 app.get('/videogames/recent', async(req, res) => {
     try {
         const getVGames = await pool.query('SELECT * FROM videogames ORDER BY time_used DESC');
@@ -59,8 +60,10 @@ app.get('/videogames/launch/:vg_id', async(req, res) => {
                         Sep: '09', Oct: '10', Nov: '11', Dec: '12'};
         var startdate = new Date();
         startdate = String(startdate);
+        //split string into components
         var [dWeek, month, day, year, time] = startdate.split(' ');
         month = months[month];
+        //change data into proper format 'yyy-mm-dd 00:00:00'
         var final = year + '-' + month + '-' + day + ' ' + time;
         console.log(final);
 
@@ -93,6 +96,7 @@ app.put('/videogames/:vg_id', async(req, res) => {
     }
 });
 
+//delete video game
 app.delete('/videogames/:vg_id', async(req, res) => {
     try {
         const { vg_id } = req.params;

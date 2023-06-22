@@ -17,6 +17,7 @@ const Edit = ({ VGames }) => {
             console.error(error.message);
         }
     };
+    //delete video game via DELETE request
     const deleteVGame = async event => {
         event.preventDefault();
         try {
@@ -61,7 +62,7 @@ const Edit = ({ VGames }) => {
                 </div>
                 </div>
             </div>
-            </div>
+        </div>
         </>
     );
 };
