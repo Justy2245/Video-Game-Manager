@@ -62,10 +62,11 @@ const Layout = () => {
 
     return (
         <>  
-            <div className ='center'>
+            <div className = 'temp'>
+            <div className ='header'>
                 <h1>Video Game Manager</h1>
                 <Input VGames/>
-                <button onClick={alpha} >Sort Alphabetically</button>
+                <button className = 'mt-2' onClick={alpha} >Sort Alphabetically</button>
                 <button onClick={recent} >Sort by recent</button>
             </div>
             <div className ='layout'>
@@ -77,6 +78,7 @@ const Layout = () => {
                         <Edit VGames = {VGames}/>
                     </section>
                 ))}
+            </div>
             </div>
         </>
     );

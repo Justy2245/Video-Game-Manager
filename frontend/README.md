@@ -21,7 +21,3 @@ The page will reload when you make changes.
 Runs in an electron app
 The electron app will reload when you make changes to the frontend
 Will need to restart if changes to electron are made
-
-### `npm run electron-serve`
-
-Builds the app into an executable for windows (still need to implement on other OS)
