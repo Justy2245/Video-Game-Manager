@@ -62,21 +62,23 @@ const Layout = () => {
 
     return (
         <>  
-            <div className ='center'>
-                <h1>Video Game Manager</h1>
-                <Input VGames/>
-                <button onClick={alpha} >Sort Alphabetically</button>
-                <button onClick={recent} >Sort by recent</button>
-            </div>
-            <div className ='layout'>
-                {VGames.map(VGames => (
-                    <section key ={VGames.vg_id}>
-                        <img src={`${VGames.picturelink}`} alt=""></img>
-                        <h4>{VGames.name}</h4>
-                        <button onClick = {event => execute(event, `${VGames.vg_id}`)}>Launch Game</button>
-                        <Edit VGames = {VGames}/>
-                    </section>
-                ))}
+            <div className = 'mainBody'>
+                <div className ='header'>
+                    <h1>Video Game Manager</h1>
+                    <Input VGames/>
+                    <button className = 'mt-2' onClick={alpha} >Sort Alphabetically</button>
+                    <button onClick={recent} >Sort by recent</button>
+                </div>
+                <div className ='layout'>
+                    {VGames.map(VGames => (
+                        <section key ={VGames.vg_id}>
+                            <img src={`${VGames.picturelink}`} alt=""></img>
+                            <h4>{VGames.name}</h4>
+                            <button onClick = {event => execute(event, `${VGames.vg_id}`)}>Launch Game</button>
+                            <Edit VGames = {VGames}/>
+                        </section>
+                    ))}
+                </div>
             </div>
         </>
     );
