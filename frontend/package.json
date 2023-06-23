@@ -21,6 +21,7 @@
     "react-build": "react-scripts build",
     "react-test": "react-scripts test",
     "react-eject": "react-scripts eject",
+    "app-start": "concurrently -k \"npm run react-start\" \"npm run --prefix ../Server server-start\"",
     "electron-serve": "concurrently -k \"cross-env BROWSER=none npm run react-start\" \"npm run electron-start\"",
     "electron-build": "",
     "electron-start": "electron ."
