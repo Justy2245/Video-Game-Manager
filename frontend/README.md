@@ -19,5 +19,5 @@ The page will reload when you make changes.
 ### `npm run electron-serve`
 
 Runs in an electron app
-The electron app will reload when you make changes to the frontend
+The electron app will reload when you make changes to the frontend.\
 Will need to restart if changes to electron are made
