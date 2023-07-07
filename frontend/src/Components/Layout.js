@@ -8,7 +8,7 @@ const Layout = () => {
     const [VGames, setVGames] = useState([]);
 
     //get all of the video games stored in database in alphabetical order
-    const getVGames = async () => {
+    const getVGamesAlpha = async () => {
         try {
             const data = await fetch('http://localhost:4000/videogames/alpha');
             const json = await data.json();
@@ -18,7 +18,17 @@ const Layout = () => {
         }
     }
     //get all of the video games stored in database ordered by recently used
-    const getVGames1 = async () => {
+    const getVGamesRecent = async () => {
+        try {
+            const data = await fetch('http://localhost:4000/videogames/recent');
+            const json = await data.json();
+            setVGames(json);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const searchGames = async () => {
         try {
             const data = await fetch('http://localhost:4000/videogames/recent');
             const json = await data.json();
@@ -53,10 +63,10 @@ const Layout = () => {
     useEffect(() => {
         if(localStorage.getItem('sorted') === 'recent')
         {
-            getVGames1();
+            getVGamesRecent();
         }
         else {
-            getVGames();
+            getVGamesAlpha();
         }
     }, []);
 
@@ -68,6 +78,9 @@ const Layout = () => {
                     <Input VGames/>
                     <button className = 'mt-2' onClick={alpha} >Sort Alphabetically</button>
                     <button onClick={recent} >Sort by recent</button>
+                    <div className='text-center mt-3'>
+                        <input label="search" className='w-40' onChange = {() => searchGames()}/>
+                    </div>
                 </div>
                 <div className ='layout'>
                     {VGames.map(VGames => (
