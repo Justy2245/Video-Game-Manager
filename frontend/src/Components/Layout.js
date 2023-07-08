@@ -85,7 +85,7 @@ const Layout = () => {
                     <button className = 'mt-2' onClick={alpha} >Sort Alphabetically</button>
                     <button onClick={recent} >Sort by recent</button>
                     <div className='text-center mt-3'>
-                        <input label="search" className='w-40' onChange = {event => searchGames(event.target.value)}/>
+                        <input label="search" className='w-40' placeholder = 'Search' onChange = {event => searchGames(event.target.value)}/>
                     </div>
                 </div>
                 <div className ='layout'>
