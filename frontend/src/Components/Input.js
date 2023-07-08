@@ -32,11 +32,11 @@ const Input = ({ VGames }) => {
                     <h4 className="modal-title">Edit Todo</h4>
                     <button type="button" className="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div className="modal-body">
+                <form className="modal-body">
                     <input type="text" className="form-control" placeholder ='Enter Name' name = 'name' onChange ={event => setVGames({...VGames1, [event.target.name]: event.target.value})}/>
                     <input type="text" className="form-control mt-2 mb-2" placeholder ='Enter Path (Ex: D:/folder/folder1/name.exe)' name = 'pathlink' onChange ={event => setVGames({...VGames1, [event.target.name]: event.target.value})}/>
                     <input type="text" className="form-control" placeholder ='Enter Picture Link' name = 'picturelink' onChange ={event => setVGames({...VGames1, [event.target.name]: event.target.value})}/>
-                </div>
+                </form>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-warning" data-dismiss="modal" onClick = {event => addVGame(event)}>
                         Add

@@ -46,6 +46,18 @@ app.get('/videogames/recent', async(req, res) => {
     }
 });
 
+//get video game by input name
+app.get('/videogames/search/:name', async(req, res) => {
+    try {
+        const { name } = req.params;
+        console.log(name);
+        const getVGames = await pool.query(`SELECT * FROM videogames WHERE name = '${name}'`);
+        res.json(getVGames.rows);
+    } catch (error) {
+        console.error(error.message);
+    }
+});
+
 //launching video game via pathlink
 app.get('/videogames/launch/:vg_id', async(req, res) => {
     try {
