@@ -16,7 +16,7 @@ const Layout = () => {
         } catch (error) {
             console.log(error.message);
         }
-    }
+    };
     //get all of the video games stored in database ordered by recently used
     const getVGamesRecent = async () => {
         try {
@@ -26,17 +26,23 @@ const Layout = () => {
         } catch (error) {
             console.log(error.message);
         }
-    }
+    };
 
-    const searchGames = async () => {
-        try {
-            const data = await fetch('http://localhost:4000/videogames/recent');
+    const searchGames = async (input) => {
+        var searchValue;
+        VGames.filter(value => value.name.toLowerCase() === input.toLowerCase()).map(filteredValue => (
+           searchValue = filteredValue
+        ));
+        if(searchValue != null)
+        {
+            const data = await fetch(`http://localhost:4000/videogames/search/${searchValue.name}`);
             const json = await data.json();
             setVGames(json);
-        } catch (error) {
-            console.log(error.message);
         }
-    }
+        else {
+            getVGamesAlpha();
+        }
+    };
 
     //launch exe file associated with video game
     const execute = async (event, vg_id) => {
@@ -46,19 +52,19 @@ const Layout = () => {
         } catch (error) {
             console.log(error.message);
         }
-    } 
+    };
 
     //change to alpha to sort alphabetically on refresh
     const alpha = (event) => {
         localStorage.setItem('sorted', 'alpha');
         window.location = '/';
-    }
+    };
 
     //change to recent to sort by recently launch on refresh
     const recent = (event) => {
         localStorage.setItem('sorted', 'recent');
         window.location = '/';
-    }
+    };
 
     useEffect(() => {
         if(localStorage.getItem('sorted') === 'recent')
@@ -79,7 +85,7 @@ const Layout = () => {
                     <button className = 'mt-2' onClick={alpha} >Sort Alphabetically</button>
                     <button onClick={recent} >Sort by recent</button>
                     <div className='text-center mt-3'>
-                        <input label="search" className='w-40' onChange = {() => searchGames()}/>
+                        <input label="search" className='w-40' onChange = {event => searchGames(event.target.value)}/>
                     </div>
                 </div>
                 <div className ='layout'>
