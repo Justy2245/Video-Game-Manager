@@ -17,6 +17,7 @@ const Layout = () => {
             console.log(error.message);
         }
     };
+
     //get all of the video games stored in database ordered by recently used
     const getVGamesRecent = async () => {
         try {
@@ -28,8 +29,10 @@ const Layout = () => {
         }
     };
 
+    //get video game by search value
     const searchGames = async (input) => {
         var searchValue;
+        //look for search value in object
         VGames.filter(value => value.name.toLowerCase() === input.toLowerCase()).map(filteredValue => (
            searchValue = filteredValue
         ));
@@ -55,6 +58,7 @@ const Layout = () => {
     };
 
     //change to alpha to sort alphabetically on refresh
+    //localstorage so that value saves between refreshes
     const alpha = (event) => {
         localStorage.setItem('sorted', 'alpha');
         window.location = '/';
@@ -66,6 +70,7 @@ const Layout = () => {
         window.location = '/';
     };
 
+    //takes effect on refresh
     useEffect(() => {
         if(localStorage.getItem('sorted') === 'recent')
         {
