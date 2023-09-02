@@ -4,7 +4,7 @@ const pool = require('./database.js')
 const app = express();
 
 //using cors to let frontend request to backend
-//localhost:5000 for database access
+//localhost:4000 for database access
 //localhost:3000 for react app
 app.use(cors());
 app.use(express.json());
